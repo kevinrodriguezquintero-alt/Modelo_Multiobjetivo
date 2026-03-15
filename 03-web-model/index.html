@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,13 +8,16 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
   <link rel="stylesheet" href="css/app.css" />
+  <link rel="shortcut icon" href="assets/limon.png" type="image/x-icon">
 </head>
+
 <body class="bg-gray-50 min-h-screen">
 
   <!-- Header -->
   <header class="bg-white border-b border-gray-200 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-4 text-center">
       <h1 class="text-xl font-bold text-gray-800">
+        <img src="assets/exprimidor.png" alt="" class="w-20 h-20 mx-auto mb-2">
         Optimizador Cadena de Suministro Cítricos
       </h1>
       <p class="text-sm text-gray-500 mt-0.5">
@@ -49,10 +53,8 @@
           <label for="solver-select" class="block text-sm font-medium text-gray-700 mb-1">
             Cambiar solver
           </label>
-          <select
-            id="solver-select"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          >
+          <select id="solver-select"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
             <option value="highs">highs</option>
             <option value="glpk">glpk</option>
             <option value="cbc">cbc</option>
@@ -60,10 +62,8 @@
           </select>
         </div>
 
-        <button
-          id="solver-btn"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
-        >
+        <button id="solver-btn"
+          class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
           Cambiar solver
         </button>
         <p id="solver-msg" class="feedback-ok" aria-live="polite"></p>
@@ -77,16 +77,21 @@
           <h2 class="text-lg font-semibold text-gray-800">Parámetros del modelo</h2>
           <div class="flex items-center gap-2">
             <p id="params-msg" class="feedback-ok text-sm" aria-live="polite"></p>
-            <button
-              id="params-save-btn"
-              class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
-            >
+            <button id="params-save-btn"
+              class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
               Guardar cambios
             </button>
-            <button
-              id="params-reset-btn"
-              class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
-            >
+            <button id="params-export-btn"
+              class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+              Exportar JSON
+            </button>
+            <label
+              class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg transition-colors cursor-pointer">
+              Importar JSON
+              <input id="params-import-input" type="file" accept=".json,application/json" class="hidden" />
+            </label>
+            <button id="params-reset-btn"
+              class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
               Restaurar defaults
             </button>
           </div>
@@ -105,10 +110,8 @@
             <h2 class="text-lg font-semibold text-gray-800">Programación por Metas Lexicográfica</h2>
             <p class="text-sm text-gray-500 mt-0.5">Prioridad: Costo → Emisiones → Empleo</p>
           </div>
-          <button
-            id="lgp-btn"
-            class="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors"
-          >
+          <button id="lgp-btn"
+            class="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors">
             Ejecutar LGP
           </button>
         </div>
@@ -129,19 +132,11 @@
               <label for="er-steps" class="block text-xs font-medium text-gray-600 mb-1">
                 Pasos (steps)
               </label>
-              <input
-                id="er-steps"
-                type="number"
-                value="5"
-                min="2"
-                max="50"
-                class="w-20 border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-center focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              />
+              <input id="er-steps" type="number" value="5" min="2" max="50"
+                class="w-20 border border-gray-300 rounded-lg px-2 py-1.5 text-sm text-center focus:outline-none focus:ring-2 focus:ring-indigo-400" />
             </div>
-            <button
-              id="er-btn"
-              class="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors self-end"
-            >
+            <button id="er-btn"
+              class="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors self-end">
               Ejecutar ER
             </button>
           </div>
@@ -155,4 +150,5 @@
   <script type="module" src="js/app.js"></script>
 
 </body>
+
 </html>

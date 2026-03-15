@@ -93,10 +93,12 @@ function collectParamsPatch(container) {
 }
 
 function initParams() {
-  const container = document.getElementById("params-container");
-  const saveBtn   = document.getElementById("params-save-btn");
-  const resetBtn  = document.getElementById("params-reset-btn");
-  const msg       = document.getElementById("params-msg");
+  const container   = document.getElementById("params-container");
+  const saveBtn     = document.getElementById("params-save-btn");
+  const resetBtn    = document.getElementById("params-reset-btn");
+  const exportBtn   = document.getElementById("params-export-btn");
+  const importInput = document.getElementById("params-import-input");
+  const msg         = document.getElementById("params-msg");
 
   async function loadParams() {
     showSpinner(container);
@@ -117,6 +119,41 @@ function initParams() {
       msg.className = "feedback-ok";
     } catch (e) {
       msg.textContent = e.message;
+      msg.className = "feedback-err";
+    }
+  });
+
+  exportBtn.addEventListener("click", async () => {
+    msg.textContent = "";
+    try {
+      const data = await api.getParams();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
+      a.href     = url;
+      a.download = "params.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      msg.textContent = e.message;
+      msg.className = "feedback-err";
+    }
+  });
+
+  importInput.addEventListener("change", async () => {
+    const file = importInput.files[0];
+    if (!file) return;
+    importInput.value = "";
+    msg.textContent = "";
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      await api.updateParams(data);
+      msg.textContent = `"${file.name}" importado.`;
+      msg.className = "feedback-ok";
+      loadParams();
+    } catch (e) {
+      msg.textContent = `Error al importar: ${e.message}`;
       msg.className = "feedback-err";
     }
   });
