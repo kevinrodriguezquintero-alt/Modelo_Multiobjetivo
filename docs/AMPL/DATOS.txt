@@ -1,0 +1,262 @@
+# CONJUNTO DE DATOS EN AMPL CORRESPONDIENTE AL PROBLEMA SOSTENIBILIDAD EN LA CS PARA CITRICOS
+
+# CONJUNTOS PRINCIPALES
+
+set I:= 1;
+set J:= 1 2 3 4 5 6 7;
+set K:= 1 2 3 4;
+set U:= 1 2 3 4 5 6 7 8 9 10;
+
+# PARÁMETROS
+
+# Rendimiento para cada productor u
+# (Kg/Ha) semana
+
+param RA:=
+
+1 	6.25
+2 	10.74
+3 	18
+4 	25.78
+5	35.54
+6	60
+7	82.03
+8	117.18
+9	225
+10	450;
+
+# Rendimiento maximo es la sumatoria de todos los redimientos de los productores u
+# (Kg/Ha) semana
+
+param RB:= 2585.02;
+
+# Rendimiento maximo del cultivo base según información
+# (Kg/Ha) semana
+
+param RC:= 
+
+1	750;
+
+# Rendimiento minimo del cultivo base según información
+# (Kg/Ha) semana
+
+param RD:= 
+
+1	100;
+
+# Capacidad productiva de una persona para procesar un kilo de fruta en el intermediario j
+# (Kg/persona)
+
+param CA:=
+
+1 	20
+2 	25
+3 	23
+4 	18
+5	17
+6	20
+7	30;
+
+# Capacidad productiva de una persona para procesar un kilo de fruta en el detallista k
+# (Kg/persona)
+
+param CB:=
+
+1 	130
+2	140
+3	120
+4	100;
+ 
+# Costo de producción en el productor i 
+# ($/Kg)
+
+param CP:=
+
+1	 551;
+ 
+# Costo de procesamiento del intermediario j (Costos por empaque y mo)
+# ($/Kg)
+
+param CI:=
+
+1 	100
+2 	80
+3 	70
+4 	120
+5	170
+6	200
+7	90;
+ 
+# Costo de transporte desde el productor i hasta el intermediario j a cargo del intermediario 
+# ($/Kg)
+
+param CT:	1	2	3	4	5	6	7    :=
+
+1		29.73	39.71	4.43	4.43	17.5	20	40 ;
+
+# Costo de transporte desde el intermediario j hasta el detallista k cargo del intermediario 
+# ($/Kg)
+
+param CTT:	1	2	3	4    :=
+
+1		69.3	87.03	12	22 
+2		0	45	90	50
+3		33.77	53.17	100	10
+4		33.77	53.17	60	90
+5		21	80	37	38
+6		40	25	20	70
+7		100	30	180	27 ;
+
+# Costo de mano de obra o de recepción en el detallista k
+# ($/Kg)
+
+param CD:=
+
+1 	60000
+2 	130000
+3	200000
+4	100000 ;
+
+# Costo por daño en el producto durante el transporte desde el productor i hasta el intermediario j a cargo del intermediario (Costo flete + costo del producto)
+# ($/Kg)
+
+param CDA:	1	2	3	4	5	6	7    :=
+
+1		675.73	685.71	650.43	650.43	600	610	500 ;
+
+# Costo por daño en el producto durante el transporte desde el intermediario j hasta el detallista k a cargo del intermediario (Costo flete + costo del producto + costo de procesamiento en el intermediario)
+# ($/Kg)
+
+param CDF:	1	2	3	4    :=
+
+1		1715.3	1733.03	1700	1800 
+2		1446	1491	1400	1440
+3		1379.7	1399.17	1300	1200
+4		1879.7	1899.17	1900	1990
+5		1900	1910	1880	1800	
+6		1500	1450	1370	1510
+7		1200	1220	1280	1290 ;
+
+# Porcentaje (%) de daño en el producto durante la distribución desde el productor i hasta el intermediario j a cargo del intermediario
+# (%)
+
+param P:	1	2	3	4	5	6	7    :=
+
+1		0.02	0.03	0.05	0.08	0.01	0.03	0.045 ;
+
+# Porcentaje (%) de daño en el producto durante la distribución desde el intermediario j hasta el detallista k a cargo del intermediario
+# (%)
+
+param PP:	1	2	3	4    :=
+
+1		0.08	0.07	0.09	0.08	 
+2		0.07	0.05	0.06	0.01	
+3		0.12	0.09	0.08	0.1
+4		0.18	0.03	0.12	0.1
+5		0.06	0.06	0.05	0.04
+6		0.02	0.03	0.04	0.05
+7		0.11	0.07	0.08	0.1 ;
+
+
+ 
+# Capacidad de producción en el productor i
+# (Kg/día)
+
+param CN:=
+
+1 	38025;
+
+# Capacidad de despacho en el productor i
+# (Kg/día)
+
+param CH:=
+
+1 	38025;
+
+# Capacidad de despacho en el intermediario j
+# (Kg/día)
+
+param CHI:=
+
+1 	5000
+2 	2000
+3 	800
+4 	7000
+5	6000
+6	9000
+7	3000;
+
+# Capacidad de recepción en el detallista k
+# (Kg/día)
+
+param CR:=
+
+1 	3000
+2 	10000
+3	2000
+4	11100;
+
+# Demanda en el intermediario j
+# (Kg/día)
+
+param DI:=
+
+1 	1100
+2 	850
+3 	700
+4 	4500
+5	3000
+6	5340
+7	1290;
+
+# Demanda en el detallista k
+# (Kg/día)
+
+param DD:=
+
+1 	1300
+2 	2800
+3	1000
+4	8000;
+
+# Capacidad del vehiculo en el intermediario j
+# (Kg/viaje)
+
+param CV:=
+
+1 	7000
+2 	4500
+3 	1000
+4 	4500
+5	1000
+6	1000
+7	1000;
+
+# Costo de mano de obra en el intermediario j
+# ($/sema)
+
+param CMO:=
+
+1 	130207
+2 	100000
+3 	 50000
+4 	130207
+5	60000
+6	80000
+7	14000;
+
+# numero de hectareas 
+# (Ha) semana
+
+param H:=
+
+1 	3.2
+2 	25.6
+3 	10
+4 	6.4
+5	38.4
+6	0.5
+7	6.4
+8	6.4
+9	5
+10	10;

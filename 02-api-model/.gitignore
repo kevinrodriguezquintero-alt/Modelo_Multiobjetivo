@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+venv/
+env/
+.env
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Solver output
+*.nl
+*.sol
+*.log
+
+# FastAPI / uvicorn
+*.pid
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

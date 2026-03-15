@@ -1,0 +1,299 @@
+/* ── Spinner ───────────────────────────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid #e5e7eb;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 2rem auto;
+}
+
+/* ── Nav tabs ─────────────────────────────────────────────────────────────── */
+.tab-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.tab-btn:hover { color: #4f46e5; }
+.tab-active {
+  color: #4f46e5 !important;
+  border-bottom-color: #4f46e5 !important;
+}
+
+/* ── Badges ───────────────────────────────────────────────────────────────── */
+.solver-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: #eef2ff;
+  color: #4338ca;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.badge-ok  { background: #dcfce7; color: #16a34a; }
+.badge-err { background: #fee2e2; color: #dc2626; }
+
+/* ── Tables ───────────────────────────────────────────────────────────────── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.data-table th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.data-table tbody tr:hover { background: #f9fafb; }
+.params-table { max-height: 65vh; display: block; overflow-y: auto; }
+
+/* ── Param display ────────────────────────────────────────────────────────── */
+.param-dict {
+  font-size: 0.78rem;
+  background: #f1f5f9;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  word-break: break-all;
+}
+.type-tag {
+  font-size: 0.72rem;
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px;
+}
+
+/* ── LGP steps ────────────────────────────────────────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.step-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
+}
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.step-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+.step-priority {
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+}
+
+/* ── Variables grid ───────────────────────────────────────────────────────── */
+.vars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.var-block {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+.var-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6366f1;
+  margin-bottom: 0.5rem;
+}
+
+.scatter-wrap {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  max-width: 560px;
+}
+
+/* ── Inner tabs (Resultado / Logs) ────────────────────────────────────────── */
+.inner-tabs-bar {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+}
+.inner-tab-btn {
+  padding: 0.35rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+}
+.inner-tab-btn:hover { color: #4f46e5; }
+.inner-tab-active {
+  color: #4f46e5 !important;
+  border-bottom-color: #4f46e5 !important;
+}
+
+/* ── Terminal ─────────────────────────────────────────────────────────────── */
+.terminal-wrap {
+  border-radius: 0.6rem;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  font-family: "Fira Code", "Cascadia Code", "Consolas", monospace;
+}
+.terminal-header {
+  background: #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+}
+.terminal-title {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+}
+.copy-btn {
+  font-size: 0.72rem;
+  background: #334155;
+  color: #cbd5e1;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.copy-btn:hover { background: #475569; color: #f1f5f9; }
+.terminal-body {
+  background: #0f172a;
+  color: #86efac;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  padding: 1rem;
+  margin: 0;
+  max-height: 420px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ── Editable param inputs ────────────────────────────────────────────────── */
+.param-input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.35rem;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+  width: 7rem;
+  background: #fff;
+  color: #1e293b;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.param-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.2);
+}
+.param-input-list {
+  width: 14rem;
+}
+
+/* ── dict1 grid (key: input pairs) ───────────────────────────────────────── */
+.dict1-grid {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  gap: 0.25rem 0.5rem;
+  align-items: center;
+}
+.dict1-key {
+  font-size: 0.78rem;
+  color: #6b7280;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── dict2 sub-table ─────────────────────────────────────────────────────── */
+.dict2-wrap {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.4rem;
+}
+.dict2-table {
+  font-size: 0.8rem;
+}
+.dict2-table .param-input {
+  width: 5.5rem;
+}
+.idx-cell {
+  color: #9ca3af;
+  font-size: 0.78rem;
+  width: 2rem;
+  text-align: center;
+}
+
+/* ── Scatter chart ────────────────────────────────────────────────────────── */
+/* ── Feedback messages ────────────────────────────────────────────────────── */
+.feedback-ok  { color: #16a34a; font-size: 0.875rem; margin-top: 0.5rem; }
+.feedback-err { color: #dc2626; font-size: 0.875rem; margin-top: 0.5rem; }
+.error-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+/* ── Section subtitles ────────────────────────────────────────────────────── */
+.section-subtitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 0.75rem;
+}
+.mt-2 { margin-top: 0.5rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.result-status { font-size: 0.875rem; color: #374151; }

@@ -1,0 +1,49 @@
+
+# EJEMPLO PARA UTILIZAR EL NEOS SERVER
+
+
+# COMANDOS DE INICIALIZACIÓN DE CONDICIONES:
+
+option show_stats 1;
+option solution_precision 0;
+option omit_zero_rows 1;
+option omit_zero_cols 1;
+option display_precision 6;
+option display_round 1;
+option display_width 50;
+
+# COMANDO DE SOLUCIÓN:
+
+solve;
+
+# COMANDOS DE IMPRESIÓN DE RESULTADOS:
+
+printf "\n\n*************************************\n";
+printf "RESULTADOS DEL PROBLEMA \n";
+printf "*************************************\n\n";
+
+printf "\nCOSTO  = \t%9.1f", costo;
+
+printf "\n\nCantidad de producto a enviar del produtor al intermediario =\n\n";
+display X;
+
+printf "\nCantidad de producto a enviar del intermediario al detallista =\n\n";
+display Y;
+
+printf "\nNumero de viajes del productor al intermediario =\n\n";
+display Z;
+
+printf "\nNumero de viajes del intermediario al detallista =\n\n";
+display ZZ;
+
+printf "\nCantidad de Hectareas =\n\n";
+display W;
+
+printf "\nNunmero de personas a contratar en el intermediario  =\n\n";
+display S;
+
+printf "\nNunmero de personas a contratar en el detallista  =\n\n";
+display SS;
+
+printf "\nVariable binaria 1 si se abre el productor  =\n\n";
+display B;

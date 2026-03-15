@@ -1,0 +1,202 @@
+#Diseño de una cadena de abastecimeinto fruticola con un enfoque de sostenibilidad
+
+#CONJUNTOS PRINCIPALES
+
+set I; #Productor i
+set J; #Intermediarios j
+set K; #Detallistas k
+set U; #productores u
+
+#PARAMETROS
+
+
+param CP{i in I}>=0;
+#
+
+param CI{j in J}>=0;
+#
+
+param CMO{j in J}>=0;
+#nueva
+
+param CT{i in I, j in J}>=0;
+#
+
+param CTT{j in J, k in K}>=0;
+#
+
+param CD{k in K}>=0;
+#
+
+param CDA{i in I, j in J}>=0;
+#
+
+param CDF{j in J, k in K}>=0;
+#
+
+param P{i in I, j in J}>=0;
+#
+
+param PP{j in J, k in K}>=0;
+#
+
+param RA{u in U}>=0;
+#nueva
+
+param RB >=0;
+#nueva
+
+param RC{i in I}>=0;
+#nueva
+
+param RD{i in I}>=0;
+#nueva
+
+param CN{i in I}>=0;
+#C
+
+param CH{i in I}>=0;
+#
+
+param CHI{j in J}>=0;
+#
+
+param CR{k in K}>=0;
+#
+
+param DD{k in K}>=0;
+#
+
+param DI{j in J}>=0;
+#
+
+param CV{j in J}>=0;
+#
+
+param CA{j in J}>=0;
+#
+
+param CB{k in K}>=0;
+#nueva
+
+param H{u in U}>=0;
+#nueva
+
+
+#VARIABLES DE DECISION
+
+var X{i in I, j in J}>=0;
+#kg
+
+var Y{j in J, k in K}>=0;
+# kg
+
+var Z{i in I, j in J} integer; 
+#Numero de viajes de la entidad i a la entidad j 
+#
+
+var ZZ{j in J, k in K} integer;
+#Numero de viajes de la entidad j a la entidad k
+#
+
+var W{i in I}>=0;
+#
+#Ha
+
+var S{j in J} integer;
+#
+# personas
+
+var SS{k in K} integer;
+#
+# personas
+
+var B{u in U} binary;
+#
+#
+
+
+#FUNCIÓN OBJETIVO
+
+minimize costo:
+sum{i in I, j in J} (CP[i]*X[i,j])
+
++sum{i in I, j in J} (CI[j]*X[i,j])
+
++sum{i in I, j in J} (CMO[j]*S[j])
+
++sum{i in I, j in J} (CT[i,j]*X[i,j])
+
++sum{j in J, k in K} (CTT[j,k]*Y[j,k])
+
++sum{j in J, k in K} (CD[k]*SS[k])
+
++sum{i in I, j in J} (CDA[i,j]*P[i,j]*X[i,j])
+
++sum{j in J, k in K} (CDF[j,k]*PP[j,k]*Y[j,k]);
+
+
+# RESTRICCIONES
+
+subject to cap_pro:
+sum{i in I} (RC[i]*W[i]) = sum{i in I} (CN[i]);
+
+subject to cap_desI{i in I}:
+sum{j in J} (X[i,j]) <= CH[i];
+
+subject to cap_desJ{j in J}:
+sum{k in K} (Y[j,k]) <= CHI[j];
+
+subject to cap_rec{k in K}:
+sum{j in J} (Y[j,k]) <= CR[k];
+
+subject to cap_veh{j in J}:
+sum{i in I} (X[i,j]) <= CV[j]*sum{i in I} (Z[i,j]);
+
+subject to cap_vehh{j in J}:
+sum{k in K} (Y[j,k]) <= CV[j]*sum{k in K} (ZZ[j,k]);
+
+subject to cap_demI{j in J}:
+sum{i in I} (X[i,j]) >= DI[j];
+
+subject to cap_demD{k in K}:
+sum{j in J} (Y[j,k]) >= DD[k];
+
+subject to cap_balce{j in J}:
+sum{i in I} (X[i,j]*(1-P[i,j]) - X[i,j]*(P[i,j])) = sum{k in K} (Y[j,k]*(1-PP[j,k]));
+
+subject to cap_opemax{i in I}:
+sum{j in J} (X[i,j]) <= RC[i]*W[i];
+
+subject to cap_opemin{i in I}:
+sum{j in J} (X[i,j]) >= RD[i]*W[i];
+
+subject to cap_opeB{j in J}:
+sum{i in I} (Z[i,j]) <= sum{i in I} (X[i,j]/CV[j]) + 1;
+
+subject to cap_opeC{j in J}:
+sum{k in K} (ZZ[j,k]) <= sum{k in K} (Y[j,k]/CV[j]) + 1;
+
+#Parte de variable de numero de personas
+
+subject to cap_perI{j in J}:
+sum{i in I} (X[i,j]) = S[j]*CA[j];
+
+subject to cap_perD{k in K}:
+sum{j in J} (Y[j,k]) = SS[k]*CB[k];
+
+#parte de variable binaria 
+
+subject to var_bina:
+sum{u in U} (RA[u]*B[u]) <= RB;
+
+subject to suma_w{i in I}:
+sum{u in U} (B[u]*H[u]) = W[i];
+
+
+
+
+
+
+
+
