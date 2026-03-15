@@ -198,6 +198,40 @@ export function renderErResult(data) {
 
 // ── Params (editable) ───────────────────────────────────────────────────────
 
+const PARAM_DESCRIPTIONS = {
+  PRODUCERS:         "Conjunto de productores (I)",
+  INTERMEDIARIES:    "Conjunto de intermediarios (J)",
+  RETAILERS:         "Conjunto de detallistas (K)",
+  PRODUCER_VARIANTS: "Variantes de productor (U)",
+  RB:  "Rendimiento máximo total (Kg/Ha·semana)",
+  RA:  "Rendimiento por variante de productor u (Kg/Ha·semana)",
+  RC:  "Rendimiento máximo del cultivo base por productor i (Kg/Ha·semana)",
+  RD:  "Rendimiento mínimo del cultivo base por productor i (Kg/Ha·semana)",
+  CA:  "Capacidad productiva por persona en intermediario j (Kg/persona)",
+  CB:  "Capacidad productiva por persona en detallista k (Kg/persona)",
+  CP:  "Costo de producción en productor i ($/Kg)",
+  CI:  "Costo de procesamiento en intermediario j ($/Kg)",
+  CT:  "Costo de transporte productor i → intermediario j ($/Kg)",
+  CTT: "Costo de transporte intermediario j → detallista k ($/Kg)",
+  CD:  "Costo de mano de obra en detallista k ($/semana)",
+  CDA: "Costo por daño en ruta productor i → intermediario j ($/Kg)",
+  CDF: "Costo por daño en ruta intermediario j → detallista k ($/Kg)",
+  P:   "Porcentaje de daño productor i → intermediario j (%)",
+  PP:  "Porcentaje de daño intermediario j → detallista k (%)",
+  CN:  "Capacidad de producción en productor i (Kg/día)",
+  CH:  "Capacidad de despacho en productor i (Kg/día)",
+  CHI: "Capacidad de despacho en intermediario j (Kg/día)",
+  CR:  "Capacidad de recepción en detallista k (Kg/día)",
+  DI:  "Demanda mínima en intermediario j (Kg/día)",
+  DD:  "Demanda mínima en detallista k (Kg/día)",
+  CV:  "Capacidad del vehículo en intermediario j (Kg/viaje)",
+  CMO: "Costo de mano de obra en intermediario j ($/semana)",
+  H:   "Número de hectáreas por variante de productor u (Ha·semana)",
+  DPI: "Distancia/impacto ambiental ruta productor i → intermediario j (km)",
+  DID: "Distancia/impacto ambiental ruta intermediario j → detallista k (km)",
+  IT:  "Factor de impacto de transporte por intermediario j",
+};
+
 export function renderParams(data) {
   if (!data) return `<p class="text-red-500">Sin datos.</p>`;
 
@@ -255,9 +289,11 @@ export function renderParams(data) {
       inputHtml = String(val ?? "—");
     }
 
+    const desc = PARAM_DESCRIPTIONS[key] ?? "";
     return `
       <tr>
         <td><strong>${key}</strong></td>
+        <td class="param-desc">${desc}</td>
         <td><span class="type-tag">${kind}</span></td>
         <td>${inputHtml}</td>
       </tr>`;
@@ -265,7 +301,7 @@ export function renderParams(data) {
 
   return `
     <table class="data-table params-table">
-      <thead>${th("Parámetro", "Tipo", "Valor / Editar")}</thead>
+      <thead>${th("Parámetro", "Descripción", "Tipo", "Valor / Editar")}</thead>
       <tbody>${rows}</tbody>
     </table>`;
 }

@@ -74,6 +74,11 @@
 }
 .data-table tbody tr:hover { background: #f9fafb; }
 .params-table { max-height: 65vh; display: block; overflow-y: auto; }
+.param-desc {
+  font-size: 0.8rem;
+  color: #6b7280;
+  max-width: 22rem;
+}
 
 /* ── Param display ────────────────────────────────────────────────────────── */
 .param-dict {
